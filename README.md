@@ -31,6 +31,7 @@ Document scanning and automated OCR pipelines frequently encounter receipts capt
 | **Input Resolution** | 224 × 224 | Normalized to ImageNet mean `[0.485, 0.456, 0.406]` and std `[0.229, 0.224, 0.225]`. |
 
 ### Data Leakage Prevention Strategy
+
 To prevent data leakage, original receipts are partitioned into **Training (80%)** and **Validation (20%)** sets **prior** to rotational transformations. All rotated variations of any given original document remain strictly within the same split.
 
 ---
@@ -47,3 +48,73 @@ To prevent data leakage, original receipts are partitioned into **Training (80%)
 ├── training_results.png     # Train/Val loss and accuracy curves
 ├── .gitignore               # Excludes large binaries (.pth, dataset/, .zip)
 └── README.md
+```
+
+---
+
+## 🚀 Usage
+
+### 1. Requirements
+
+```bash
+pip install torch torchvision pillow matplotlib
+```
+
+### 2. Dataset Preparation
+
+Place all upright original receipt images into `dataset/raw_originals/`, then run:
+
+```bash
+python3 prepare_dataset.py
+```
+
+### 3. Model Training
+
+Train the model and save the best checkpoint:
+
+```bash
+python3 train_model.py
+```
+
+This outputs `receipt_orientation_model.pth` and saves learning curves to `training_results.png`.
+
+### 4. Single-Image Inference
+
+Evaluate a single image:
+
+```bash
+python3 predict.py path/to/receipt.jpg
+```
+
+Example output:
+
+```text
+Image: test_receipt.jpg | Predicted Orientation: 90° (Confidence: 98.7%)
+```
+
+### 5. Exam Day Batch Prediction
+
+Run automated inference on a directory containing instructor-provided test images:
+
+```bash
+python3 predict_folder.py path/to/exam_images_folder/
+```
+
+### 6. Dataset Packaging (Assignment Submission)
+
+Export all labeled images into a unified `dataset/` directory structure compressed as `receipt_dataset.zip`:
+
+```bash
+python3 package_submission.py
+```
+
+---
+
+## 📊 Training Results
+
+- **Validation Accuracy:** ≥ 97%
+- **Inference Speed:** < 25 ms per document on Apple Silicon (`mps`) / CPU
+
+The model demonstrates strong invariance to thermal paper folds, merchant logos, and bilingual (Thai-English) document formats.
+
+![Training results](training_results.png)
