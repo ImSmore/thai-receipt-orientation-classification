@@ -1,5 +1,3 @@
-cd ~/ai_concepts/project
-cat << 'EOF' > README.md
 # Thai Receipt Orientation Classification
 
 A deep learning image classification pipeline built with **PyTorch** to detect and classify the physical orientation of Thai receipts, bills, and everyday retail documents into four classes: **0° (upright), 90°, 180° (upside down), and 270°**.
