@@ -46,6 +46,7 @@ To prevent data leakage, original receipts are partitioned into **Training (80%)
 ├── compare_model.py         # Evaluates different models on your testing images
 ├── package_submission.py    # Packages dataset into clean submission ZIP
 ├── training_results.png     # Train/Val loss and accuracy curves
+├── test_receipt_model.py    # Test different models on single images or a folder of images
 ```
 
 ---
