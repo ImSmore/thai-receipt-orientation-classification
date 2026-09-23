@@ -43,11 +43,9 @@ To prevent data leakage, original receipts are partitioned into **Training (80%)
 ├── prepare_dataset.py       # Splits original images and generates 4-class rotations
 ├── train_model.py           # Fine-tunes ResNet-18 and plots loss/accuracy curves
 ├── predict.py               # Runs single-image inference using saved weights
-├── predict_folder.py        # Evaluates an entire folder of unseen exam images
+├── compare_model.py         # Evaluates different models on your testing images
 ├── package_submission.py    # Packages dataset into clean submission ZIP
 ├── training_results.png     # Train/Val loss and accuracy curves
-├── .gitignore               # Excludes large binaries (.pth, dataset/, .zip)
-└── README.md
 ```
 
 ---
